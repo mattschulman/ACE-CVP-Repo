@@ -3,3 +3,18 @@ path: "{{lookup('env','PWD')}}"
 cvp_configlets_test:
  Alias_test: “alias ship show ip interface brief”
  MLAG-Left: "{{ lookup('file','{{path}}/configlets/MLAG-Left.cfg') }}"
+ MLAG-Right: "{{ lookup('file', '{{path}}/configlets/MLAG-Right.cfg') }}"
+
+cvp_devices_test:
+  - fqdn: 'leaf1'
+    parentContainerName: 'Leaf'
+    configlets:
+      - 'ATD-INFRA'
+      - 'leaf1-base'
+      - 'MLAG-Left'
+  - fqdn: 'leaf2'
+    parentContainerName: 'Leaf'
+    configlets:
+      - 'ATD-INFRA'
+      - 'leaf2-base'
+      - 'MLAG-Right'
